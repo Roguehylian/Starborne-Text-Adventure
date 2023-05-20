@@ -41,7 +41,7 @@ def title_screen_selections():
 
 def title_screen():
 	print('############################')
-	print('# Welcome to the Text RPG! #')
+	print('#   Welcome to Starborne!  #')
 	print('############################')
 	print('         - Play -           ')
 	print('         - Help -           ')
@@ -50,13 +50,13 @@ def title_screen():
 
 def help_menu():
 	print('############################')
-	print('# Welcome to the Text RPG! #')
+	print('# Welcome to Starborne! #')
 	print('############################')
 	print('- Use up, down, left, right to move -')
 	print('- Type your commands to do them -')
-	print('- Use "Look" to inspect something -')
+	print('- Use "Examine" to inspect something -')
 	print('- Good luck and have fun! -')
-	title_screen_selections()
+	title_screen()
 
 
 
@@ -90,10 +90,10 @@ DOWN = 'down','south'
 LEFT = 'left','west'
 RIGHT = 'right','east'
 
-solved_places = {'a1': False,'a2': False,'a3': False,'a4': False,
-				'b1': False,'b2': False,'b3': False,'b4': False,
-				'c1': False,'c2': False,'c3': False,'c4': False,
-				'd1': False,'d2': False,'d3': False,'d4': False,
+solved_places = {'a1': False,'a2': False,'a3': False,
+				'b1': False,'b2': False,'b3': False,
+				'c1': False,'c2': False,'c3': False,
+				'd1': False,'d2': False,'d3': False,
 				}
 
 zonemap = {
@@ -125,7 +125,7 @@ zonemap = {
 		UP : '',
 		DOWN : 'b3',
 		LEFT : 'a2',
-		RIGHT :'a4',
+		RIGHT :'',
 	},
 	'b1': {
 		ZONENAME: "",
@@ -139,7 +139,7 @@ zonemap = {
 	},
 	'b2': {
 		ZONENAME: "Home",
-		DESCRIPTION : 'This is your home!',
+		DESCRIPTION : 'The remains of your ship lay on the ground.',
 		EXAMINATION : 'examine',
 		SOLVED : False,
 		UP : 'a2',
@@ -155,7 +155,7 @@ zonemap = {
 		UP : 'a3',
 		DOWN : 'c3',
 		LEFT : 'b2',
-		RIGHT : 'b4',
+		RIGHT : '',
 	},
 	
 	'c1': {
@@ -186,7 +186,7 @@ zonemap = {
 		UP : 'b3',
 		DOWN : '',
 		LEFT : 'c2',
-		RIGHT : 'c4',
+		RIGHT : '',
 	},
 }	
 
@@ -200,11 +200,11 @@ def print_location():
 def prompt():
 	print(f"\n================================")
 	print("What would you like to do?")
-	print("Valid actions: Move, Examine, Quit")
+	print("Valid actions: Move, Examine, Map, Quit")
 	action = input ("> ")
-	acceptable_actions = ['move','examine','quit']
+	acceptable_actions = ['move','examine','map','quit']
 	while action.lower() not in acceptable_actions:
-		print("Unknown action, try again\n")
+		print("Unknown action, try again.\n")
 		action = input("> ")
 	if action.lower() == "quit":
 		sys.exit()
@@ -212,33 +212,44 @@ def prompt():
 		player_move(action.lower)
 	elif action.lower() in ['examine','inspect','interact','look']:
 		player_examine(action.lower())
+	elif action.lower() == 'map':
+		player_map()
 
 def player_move(myAction):
 	dest = input("Where would you like to move to?\nValid options are up/north, down/south, right/east, left/west\n")
 	if dest in ['up','north']:
-		if destination == '':
-			print("oops, you can't go there.")
-			player_move
 		destination = zonemap[myPlayer.location][UP]
-		movement_handler(destination)
+		if destination == '':
+			print("oops, you can't go there.")
+			player_move(myAction)
+		else:
+			movement_handler(destination)
+
 	elif dest in ['down','south']:
-		if destination == '':
-			print("oops, you can't go there.")
-			player_move
 		destination = zonemap[myPlayer.location][DOWN]
-		movement_handler(destination)
+		if destination == '':
+			print("oops, you can't go there.")
+			player_move(myAction)
+		else:
+			movement_handler(destination)
+
+
 	elif dest in ['right','east']:
-		if destination == '':
-			print("oops, you can't go there.")
-			player_move
 		destination = zonemap[myPlayer.location][RIGHT]
-		movement_handler(destination)
-	elif dest in ['left','west']:
 		if destination == '':
 			print("oops, you can't go there.")
-			player_move
+			player_move(myAction)
+		else:
+			movement_handler(destination)
+
+
+	elif dest in ['left','west']:
 		destination = zonemap[myPlayer.location][LEFT]
-		movement_handler(destination)
+		if destination == '':
+			print("oops, you can't go there.")
+			player_move(myAction)
+		else:
+			movement_handler(destination)
 
 
 
@@ -252,7 +263,16 @@ def player_examine(action):
 		print("You have already solved this puzzle.")
 	else:
 		##### Puzzle goes here.
-		print("You a trigger a puzzle here.")
+		print("You trigger a puzzle here.")
+def player_map():
+	print('''
+----------
+|a1|a2|a3|
+----------
+|b1|b2|b3|
+----------
+|c1|c2|c3|
+----------''')
 
 
 #### GAME FUNCTIONALITY ####
