@@ -40,18 +40,22 @@ def title_screen_selections():
 			sys.exit()
 
 def title_screen():
-	print('############################')
-	print('#   Welcome to Starborne!  #')
-	print('############################')
-	print('         - Play -           ')
-	print('         - Help -           ')
-	print('         - Quit -           ')
+	print('''
+   ____                  _                             
+ / _____) _              | |                            
+( (____ _| |_ _____  ____| |__   ___   ____ ____  _____ 
+ \____ (_   _|____ |/ ___)  _ \ / _ \ / ___)  _ \| ___ |
+ _____) )| |_/ ___ | |   | |_) ) |_| | |   | | | | ____|
+(______/  \__)_____|_|   |____/ \___/|_|   |_| |_|_____)
+
+                	- Play -           
+	                - Help -           
+	                - Quit -           
+
+''')
 	title_screen_selections()
 
 def help_menu():
-	print('############################')
-	print('#   Welcome to Starborne!  #')
-	print('############################')
 	print('- Use up, down, left, right to move -')
 	print('- Type your commands to do them -')
 	print('- Use "Examine" to inspect something -')
@@ -60,11 +64,6 @@ def help_menu():
 
 
 
-
-#def exam_a1():
-#	question = input("Hello, what's 1+1?")
-#	if question == 2:
-#		return
 
 
 #### MAP #### 
@@ -97,60 +96,60 @@ rooms_solved = {'a1': False,'a2': False,'a3': False,
 
 zonemap = {
 	'a1': {
-		ZONENAME: "Town Market",
-		DESCRIPTION : 'description',
-		EXAMINATION : 'examine',
-		SOLVED : False,
+		ZONENAME: "Rock Candy Cat Room",
+		DESCRIPTION : 'A cat made out of rock candy looks at you curiously.',
+		EXAMINATION : 'The cat licks its paws and says: I am unique like a snowflake, hard as a rock. I refract like a diamond, and am found in a block. What am I?',
+		SOLVED : 'crystal',
 		UP : '',
 		DOWN : 'b1',
 		LEFT : '',
 		RIGHT : 'a2'
 	},
 	'a2': {
-		ZONENAME: "Town Entrance",
-		DESCRIPTION : 'description',
-		EXAMINATION : 'examine',
+		ZONENAME: "Grand Gate Room",
+		DESCRIPTION : 'A large purple gate stands in your path.',
+		EXAMINATION : '',
 		SOLVED : False,
-		UP :'',
+		UP :'examine',
 		DOWN : 'b2',
 		LEFT : 'a1',
 		RIGHT : 'a3',
 	},
 	'a3': {
-		ZONENAME: "Town Square",
-		DESCRIPTION : 'description',
-		EXAMINATION : 'examine',
-		SOLVED : False,
+		ZONENAME: "Meek Mouse Room",
+		DESCRIPTION : 'A meek mouse comes up to you and crawls up your body, making its way up to your head.',
+		EXAMINATION : "The mouse hangs from its tail, inches away from your face. It says: what has 12 legs, six eyes, three tails, and can't see?",
+		SOLVED : 'three blind mice',
 		UP : '',
 		DOWN : 'b3',
 		LEFT : 'a2',
 		RIGHT :'',
 	},
 	'b1': {
-		ZONENAME: "",
-		DESCRIPTION : 'description',
-		EXAMINATION : 'examine',
-		SOLVED : False,
+		ZONENAME: "Blightful Book Room",
+		DESCRIPTION : 'A tattered book coughs and wheezes as it tries to catch its breath.',
+		EXAMINATION : '''Through coughs, it manages to ask: I am but the product of another man's image. For centuries I stand, though I too wither with age. People from around the world come to spectate my visage. Though I speak no words of wisdom, I give them all my knowledge. I am a:''',
+		SOLVED : 'statue',
 		UP : 'a1',
 		DOWN : 'c1',
 		LEFT : '',
 		RIGHT : 'b2',
 	},
 	'b2': {
-		ZONENAME: "Center",
-		DESCRIPTION : 'The remains of your ship lay on the ground.',
-		EXAMINATION : 'examine',
-		SOLVED : True,
+		ZONENAME: "Curious Center Room",
+		DESCRIPTION : 'You see a small insect emerge from the rubble, spreading its wings and taking flight.',
+		EXAMINATION : 'The small insect suprinsingly clears its throat and says: You see me blink but not my eyes, I wink and wink to fraternize, And if I wink at her just right, Then I may find my love tonight. What am I?',
+		SOLVED : 'firefly',
 		UP : 'a2',
 		DOWN : 'c2',
 		LEFT : 'b1',
 		RIGHT : 'b3',
 	},
 	'b3': {
-		ZONENAME: "",
-		DESCRIPTION : 'A ghost appears in front of you',
-		EXAMINATION : 'The spooky lad asks: what is 1+1?',
-		SOLVED : 2,
+		ZONENAME: "Ghastly Ghost Room",
+		DESCRIPTION : "A haunting ghost appears in front of you, barring its frightful jagged teeth.",
+		EXAMINATION : "The spooky lad asks: When I'm young I'm tall. When I'm old I'm short. When I'm alive I glow. Because of your breath I die. I am a:",
+		SOLVED : "candle",
 		UP : 'a3',
 		DOWN : 'c3',
 		LEFT : 'b2',
@@ -158,30 +157,30 @@ zonemap = {
 	},
 	
 	'c1': {
-		ZONENAME: "",
-		DESCRIPTION : 'description',
-		EXAMINATION : 'examine',
-		SOLVED : False,
+		ZONENAME: "Chatty Chime Room",
+		DESCRIPTION : 'As you enter the room, a gust of wind comes in. A talking chime blabbers on about something.',
+		EXAMINATION : 'Its chimes stop. It asks: I am what is produced by rapid movements in the air which create sound. What am I?',
+		SOLVED : 'vibrations',
 		UP : 'b1',
 		DOWN : '',
 		LEFT : '',
 		RIGHT : 'c2',
 	},
 	'c2': {
-		ZONENAME: "",
-		DESCRIPTION : 'description',
-		EXAMINATION : 'examine',
-		SOLVED : False,
+		ZONENAME: "Lizard in a blizzard room",
+		DESCRIPTION : 'You are met with a chilling breeze that makes both you and a small lizard shiver.',
+		EXAMINATION : 'Through chattering teeth, it asks: What bites without teeth?',
+		SOLVED : 'frost',
 		UP : 'b2',
 		DOWN : '',
 		LEFT : 'c1',
 		RIGHT : 'c3',
 	},
 	'c3': {
-		ZONENAME: "",
-		DESCRIPTION : 'description',
-		EXAMINATION : 'examine',
-		SOLVED : False,
+		ZONENAME: "Condescending Canvas Room",
+		DESCRIPTION : 'A canvas with beautiful art looks at you with disgust.',
+		EXAMINATION : '''It scoffs, not even bothering to look at you. It says: I’m sometimes used with canvas but I’m not a tent. I’m used with a brush but I’m not toothpaste. What am I ?''',
+		SOLVED : 'paint',
 		UP : 'b3',
 		DOWN : '',
 		LEFT : 'c2',
@@ -254,35 +253,100 @@ def player_move(myAction):
 
 
 def checkpuzzle(puzzle_answer):
-	if myPlayer.location == 'b2':
+	### GATE ROOM CHECK
+	if myPlayer.location == 'a2':
 		if myPlayer.solves >= 8:
-			print("As you return to your ship, the door in front of you unlocks, showing you a vast field full of monsters and unknown minerals. Perhaps you can explore this world after all.")
-			print("\nCONGRATULATIONS!")
+			print("As you return to the gate, the orbs you collected merge into one, forming the mythical shadow crystal. The gate opens, showing you a vast field full of monsters and unknown minerals. Perhaps you can explore this world after all.")
+			print("\nCONGRATULATIONS! YOU WIN!")
 			sys.exit()
 		else:
-			print("Nothing seems to be happening...")
-	elif myPlayer.location == 'b3':
-		if puzzle_answer == str((zonemap[myPlayer.location][SOLVED])):
-			rooms_solved[myPlayer.location] = True
-			myPlayer.solves += 1
-			print("You have solved the puzzle. Onwards!")
-			print(f"\nOrbs collected: {str(myPlayer.solves)}/8")
-		else:
-			print("Wrong answer! Try again.\n~~~~~~~~~~~~~~~~~~~~~~~~~~")
-			player_examine()
-	else:
-		if puzzle_answer == (zonemap[myPlayer.location][SOLVED]):
-			rooms_solved[myPlayer.location] = True
-			myPlayer.solves += 1
-			print("You have solved the puzzle. Onwards!")
-			print(f"\nOrbs collected: {str(myPlayer.solves)}/8")
+			print("You try to open the gate, but it doesn't budge.")
 
+	elif myPlayer.location == 'a1':
+		if puzzle_answer.lower() == (zonemap[myPlayer.location][SOLVED]):
+			rooms_solved[myPlayer.location] = True
+			myPlayer.solves += 1
+			print("You have solved the puzzle. Onwards!")
+			print(f"\nOrbs collected: {str(myPlayer.solves)}/8")
 		else:
 			print("Wrong answer! Try again.\n~~~~~~~~~~~~~~~~~~~~~~~~~~")
 			player_examine()
+
+	elif myPlayer.location == 'a3':
+		if puzzle_answer.lower() == (zonemap[myPlayer.location][SOLVED]):
+			rooms_solved[myPlayer.location] = True
+			myPlayer.solves += 1
+			print("You have solved the puzzle. Onwards!")
+			print(f"\nOrbs collected: {str(myPlayer.solves)}/8")
+		else:
+			print("Wrong answer! Try again.\n~~~~~~~~~~~~~~~~~~~~~~~~~~")
+			player_examine()
+
+	elif myPlayer.location == 'b1':
+		if puzzle_answer.lower() == (zonemap[myPlayer.location][SOLVED]):
+			rooms_solved[myPlayer.location] = True
+			myPlayer.solves += 1
+			print("You have solved the puzzle. Onwards!")
+			print(f"\nOrbs collected: {str(myPlayer.solves)}/8")
+		else:
+			print("Wrong answer! Try again.\n~~~~~~~~~~~~~~~~~~~~~~~~~~")
+			player_examine()
+	elif myPlayer.location == 'b2':
+		if puzzle_answer.lower() == (zonemap[myPlayer.location][SOLVED]):
+			rooms_solved[myPlayer.location] = True
+			myPlayer.solves += 1
+			print("You have solved the puzzle. Onwards!")
+			print(f"\nOrbs collected: {str(myPlayer.solves)}/8")
+		else:
+			print("Wrong answer! Try again.\n~~~~~~~~~~~~~~~~~~~~~~~~~~")
+			player_examine()
+	elif myPlayer.location == 'b3':
+		if puzzle_answer.lower() == (zonemap[myPlayer.location][SOLVED]):
+			rooms_solved[myPlayer.location] = True
+			myPlayer.solves += 1
+			print("You have solved the puzzle. Onwards!")
+			print(f"\nOrbs collected: {str(myPlayer.solves)}/8")
+		else:
+			print("Wrong answer! Try again.\n~~~~~~~~~~~~~~~~~~~~~~~~~~")
+			player_examine()
+	elif myPlayer.location == 'c1':
+		if puzzle_answer.lower() == (zonemap[myPlayer.location][SOLVED]):
+			rooms_solved[myPlayer.location] = True
+			myPlayer.solves += 1
+			print("You have solved the puzzle. Onwards!")
+			print(f"\nOrbs collected: {str(myPlayer.solves)}/8")
+		else:
+			print("Wrong answer! Try again.\n~~~~~~~~~~~~~~~~~~~~~~~~~~")
+			player_examine()
+	elif myPlayer.location == 'c2':
+		if puzzle_answer.lower() == (zonemap[myPlayer.location][SOLVED]):
+			rooms_solved[myPlayer.location] = True
+			myPlayer.solves += 1
+			print("You have solved the puzzle. Onwards!")
+			print(f"\nOrbs collected: {str(myPlayer.solves)}/8")
+		else:
+			print("Wrong answer! Try again.\n~~~~~~~~~~~~~~~~~~~~~~~~~~")
+			player_examine()
+	elif myPlayer.location == 'c3':
+		if puzzle_answer.lower() == (zonemap[myPlayer.location][SOLVED]):
+			rooms_solved[myPlayer.location] = True
+			myPlayer.solves += 1
+			print("You have solved the puzzle. Onwards!")
+			print(f"\nOrbs collected: {str(myPlayer.solves)}/8")
+		else:
+			print("Wrong answer! Try again.\n~~~~~~~~~~~~~~~~~~~~~~~~~~")
+			player_examine()
+
+
+
+
+
+
+
 		
 
 
+#################################################################################################
 
 def movement_handler(destination):
 	print(f"You have moved to {destination}.")
@@ -291,9 +355,12 @@ def movement_handler(destination):
 
 def player_examine():
 	if rooms_solved[myPlayer.location] == False:
-		print(zonemap[myPlayer.location][EXAMINATION])
-		puzzle_answer = str(input())
-		checkpuzzle(puzzle_answer)
+		if myPlayer.location != 'a2':
+			print(zonemap[myPlayer.location][EXAMINATION])
+			puzzle_answer = str(input())
+			checkpuzzle(puzzle_answer)
+		else:
+			checkpuzzle('None')
 	else:
 		print("There is nothing new for you to see here.")
 
@@ -319,27 +386,15 @@ def setup_game():
 	player_name = input("Hello, what's your name?\n")
 	myPlayer.name = player_name
 	print(f"Let's start, {player_name}!")
+	print('''
+The commander sent us out to explore the planet of darkness, code named "Nyxis", named after the goddess of night, Nyx. We trained for years,
+preparing for this one mission. Me, alongside my fellow colonizers, blasted into the starry galaxy in hopes of finding a Shadow Crystal. These
+crystals are said to be husks of former absolute might, a capsule that once held incredible power. gazing in awe at the ominous planet. Its
+purple haze pulsed, emitting a low, dull hum. All of a sudden, we lost total control of the ship. Its ominous sound only grew louder the closer
+we got to the planet. Clouds of violet fogged our vision as we dived straight towards the planet, until all we could see was darkness. I opened
+my eyes, only to find my entire team dead from the crash.. My body ached with pain, but.. I saw no injuries on myself. Still dazed, I walked
+towards the murky cave with my flashlight, confusion and fear stirring within me.''')
+	print("\nYou see a small insect emerge from the rubble, spreading its wings and taking flight.")
 	main_game_loop()
 
 title_screen()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
