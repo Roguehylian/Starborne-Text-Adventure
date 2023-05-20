@@ -1,4 +1,4 @@
-# Python Text RPG
+# Starborne Text Adventure
 # By: Matthew Mendoza
 
 import cmd
