@@ -8,14 +8,14 @@ import os
 import time 
 import random
 
-screen_width = 100
-
 ##### Player Setup #####
 class player:
 	def __init__(self):
 		self.name = ''
 		self.location = 'b2'
 		self.game_over = False
+		self.solves = 0 #There are 8 puzzles.
+
 
 myPlayer = player()
 
@@ -50,7 +50,7 @@ def title_screen():
 
 def help_menu():
 	print('############################')
-	print('# Welcome to Starborne! #')
+	print('#   Welcome to Starborne!  #')
 	print('############################')
 	print('- Use up, down, left, right to move -')
 	print('- Type your commands to do them -')
@@ -90,10 +90,9 @@ DOWN = 'down','south'
 LEFT = 'left','west'
 RIGHT = 'right','east'
 
-solved_places = {'a1': False,'a2': False,'a3': False,
+rooms_solved = {'a1': False,'a2': False,'a3': False,
 				'b1': False,'b2': False,'b3': False,
 				'c1': False,'c2': False,'c3': False,
-				'd1': False,'d2': False,'d3': False,
 				}
 
 zonemap = {
@@ -138,10 +137,10 @@ zonemap = {
 		RIGHT : 'b2',
 	},
 	'b2': {
-		ZONENAME: "Home",
+		ZONENAME: "Center",
 		DESCRIPTION : 'The remains of your ship lay on the ground.',
 		EXAMINATION : 'examine',
-		SOLVED : False,
+		SOLVED : True,
 		UP : 'a2',
 		DOWN : 'c2',
 		LEFT : 'b1',
@@ -149,9 +148,9 @@ zonemap = {
 	},
 	'b3': {
 		ZONENAME: "",
-		DESCRIPTION : 'description',
-		EXAMINATION : 'Your home looks the same - nothing has changed.',
-		SOLVED : False,
+		DESCRIPTION : 'A ghost appears in front of you',
+		EXAMINATION : 'The spooky lad asks: what is 1+1?',
+		SOLVED : 2,
 		UP : 'a3',
 		DOWN : 'c3',
 		LEFT : 'b2',
@@ -211,7 +210,7 @@ def prompt():
 	elif action.lower() in ['move','go', 'travel','walk']:
 		player_move(action.lower)
 	elif action.lower() in ['examine','inspect','interact','look']:
-		player_examine(action.lower())
+		player_examine()
 	elif action.lower() == 'map':
 		player_map()
 
@@ -220,7 +219,7 @@ def player_move(myAction):
 	if dest in ['up','north']:
 		destination = zonemap[myPlayer.location][UP]
 		if destination == '':
-			print("oops, you can't go there.")
+			print("Oops, you can't go there.")
 			player_move(myAction)
 		else:
 			movement_handler(destination)
@@ -253,19 +252,54 @@ def player_move(myAction):
 
 
 
+
+def checkpuzzle(puzzle_answer):
+	if myPlayer.location == 'b2':
+		if myPlayer.solves >= 8:
+			print("As you return to your ship, the door in front of you unlocks, showing you a vast field full of monsters and unknown minerals. Perhaps you can explore this world after all.")
+			print("\nCONGRATULATIONS!")
+			sys.exit()
+		else:
+			print("Nothing seems to be happening...")
+	elif myPlayer.location == 'b3':
+		if puzzle_answer == str((zonemap[myPlayer.location][SOLVED])):
+			rooms_solved[myPlayer.location] = True
+			myPlayer.solves += 1
+			print("You have solved the puzzle. Onwards!")
+			print(f"\nOrbs collected: {str(myPlayer.solves)}/8")
+		else:
+			print("Wrong answer! Try again.\n~~~~~~~~~~~~~~~~~~~~~~~~~~")
+			player_examine()
+	else:
+		if puzzle_answer == (zonemap[myPlayer.location][SOLVED]):
+			rooms_solved[myPlayer.location] = True
+			myPlayer.solves += 1
+			print("You have solved the puzzle. Onwards!")
+			print(f"\nOrbs collected: {str(myPlayer.solves)}/8")
+
+		else:
+			print("Wrong answer! Try again.\n~~~~~~~~~~~~~~~~~~~~~~~~~~")
+			player_examine()
+		
+
+
+
 def movement_handler(destination):
 	print(f"You have moved to {destination}.")
 	myPlayer.location = destination
 	print_location()
 
-def player_examine(action):
-	if zonemap[myPlayer.location][SOLVED]:
-		print("You have already solved this puzzle.")
+def player_examine():
+	if rooms_solved[myPlayer.location] == False:
+		print(zonemap[myPlayer.location][EXAMINATION])
+		puzzle_answer = str(input())
+		checkpuzzle(puzzle_answer)
 	else:
-		##### Puzzle goes here.
-		print("You trigger a puzzle here.")
+		print("There is nothing new for you to see here.")
+
 def player_map():
-	print('''
+	print(f'''
+You are currently at: {myPlayer.location }
 ----------
 |a1|a2|a3|
 ----------
